@@ -1,0 +1,23 @@
+import pandas as pd
+import ace_tools as tools
+
+# from security.security_audit import AegisLangSecurityAudit
+
+def main():
+    # Suppose we have AI-generated code or enterprise code to check
+    generated_enterprise_code = "module ECommercePlatform: ..."
+    optimized_ai_code = "module ECommercePlatform: ... optimized ..."
+
+    security_audit = AegisLangSecurityAudit([generated_enterprise_code, optimized_ai_code])
+    audit_results = security_audit.run_audit()
+
+    df_security_audit = pd.DataFrame([
+        {"Stage": "Security Scan", "Result": ", ".join(audit_results["Security Scan"])},
+        {"Stage": "Code Integrity Check", "Result": ", ".join(audit_results["Code Integrity Hash"])}
+    ])
+    tools.display_dataframe_to_user(name="AegisLang Security Audit Results", dataframe=df_security_audit)
+
+    print("Security audit demo complete!")
+
+if __name__ == "__main__":
+    main()

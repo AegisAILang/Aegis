@@ -1,0 +1,29 @@
+import pandas as pd
+import ace_tools as tools
+# from pkg_manager.package_manager import AegisPackageManager
+
+def main():
+    pkg_manager = AegisPackageManager()
+
+    # 1) Create a project
+    project_creation_result = pkg_manager.create_project("MyAegisProject")
+
+    # 2) Install packages
+    pkg_install_result1 = pkg_manager.install_package("MyAegisProject", "http_client", "1.0.0")
+    pkg_install_result2 = pkg_manager.install_package("MyAegisProject", "json_parser", "2.1.3")
+
+    # 3) List dependencies
+    installed_dependencies = pkg_manager.list_dependencies("MyAegisProject")
+
+    df_pkg_manager = pd.DataFrame([
+        {"Action": "Create Project", "Result": project_creation_result},
+        {"Action": "Install Package", "Result": pkg_install_result1},
+        {"Action": "Install Package", "Result": pkg_install_result2},
+        {"Action": "List Dependencies", "Result": str(installed_dependencies)}
+    ])
+    tools.display_dataframe_to_user(name="AegisLang Package Manager Results", dataframe=df_pkg_manager)
+
+    print("Package manager demo complete!")
+
+if __name__ == "__main__":
+    main()

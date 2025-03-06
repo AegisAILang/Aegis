@@ -1,0 +1,13 @@
+---
+description: Best practices and guidelines for Aegis programming language
+globs: **/*.ae
+alwaysApply: false
+---
+- Leverage Aegis's strong typing to prevent null errors; use Option<T> and Result<T, E> for advanced structures.
+- Utilize Aegis's built-in concurrency features (tasks, async/await) for efficient parallel processing.
+- Follow Aegis's ownership model to ensure memory safety without garbage collection.
+- Use clear and explicit function signatures to enhance readability and AI code generation.
+- Employ Aegis's modular and composable structures (modules, structs, functions) for better code organization.
+- Compile to WebAssembly for cross-platform compatibility and performance.
+- Regularly run AegisLangSecurityAudit to ensure code security, especially for AI-generated code.
+- Use AegisPackageManager and aegis.json for efficient dependency management and project setup.

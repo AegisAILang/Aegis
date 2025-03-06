@@ -1,0 +1,7 @@
+module UserSystem:
+    struct User:
+        name: string
+        age: int
+
+    fn create_user(name: string, age: int) -> User:
+        return User(name, age)

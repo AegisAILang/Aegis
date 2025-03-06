@@ -1,0 +1,9 @@
+---
+description: Best practices for working with LLVM in Aegis
+globs: **/*.{ll,llvm}
+alwaysApply: false
+---
+- Optimize LLVM IR generation for better performance in Aegis applications.
+- Use LLVM's Just-In-Time (JIT) compilation for immediate code execution.
+- Leverage LLVM's Ahead-Of-Time (AOT) compilation for native binary generation.
+- Profile and benchmark your LLVM IR to identify and resolve performance bottlenecks.

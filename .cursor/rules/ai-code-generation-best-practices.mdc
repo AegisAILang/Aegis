@@ -1,0 +1,9 @@
+---
+description: Best practices for AI-driven code generation in Aegis
+globs: *.{ae,py}
+alwaysApply: false
+---
+- Utilize Aegis's minimal ambiguity for easier AI code generation.
+- Implement DSL-like approaches for SaaS automation modules.
+- Validate and optimize AI-generated code using Aegis's AI code validation tools.
+- Use enterprise scaffolding provided by AI integration for rapid development.

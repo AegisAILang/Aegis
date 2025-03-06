@@ -1,0 +1,35 @@
+import pandas as pd
+import ace_tools as tools
+
+# from wasm.wasm_compiler import WebAssemblyCompiler, WebAssemblyIRGenerator
+# from benchmarks.benchmark import AegisLangBenchmark, AOTCompiler
+
+def main():
+    # We'll assume you have some example LLVM IR or you generate it earlier in code:
+    llvm_ir = "; your earlier generated IR here..."
+
+    # 1) WebAssembly Compilation
+    wasm_compiler = WebAssemblyCompiler(llvm_ir)
+    wasm_result = wasm_compiler.compile_to_wasm()
+
+    df_wasm = pd.DataFrame([{"Stage": "WebAssembly Compilation", "Result": wasm_result}])
+    tools.display_dataframe_to_user(name="AegisLang WebAssembly Compilation Results", dataframe=df_wasm)
+
+    # 2) AOT Compilation 
+    aot_compiler = AOTCompiler(llvm_ir)
+    native_compile_result = aot_compiler.compile_to_native()
+
+    df_aot = pd.DataFrame([{"Stage": "Native Binary Compilation", "Result": native_compile_result}])
+    tools.display_dataframe_to_user(name="AegisLang Native Compilation Results", dataframe=df_aot)
+
+    # 3) Benchmarks
+    benchmark = AegisLangBenchmark(llvm_ir)
+    benchmark_results = benchmark.run_benchmarks()
+
+    df_benchmarks = pd.DataFrame(benchmark_results)
+    tools.display_dataframe_to_user(name="AegisLang Performance Benchmark Results", dataframe=df_benchmarks)
+
+    print("WASM, AOT, and Benchmark demo complete!")
+
+if __name__ == "__main__":
+    main()

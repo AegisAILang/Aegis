@@ -1,0 +1,76 @@
+"""
+Demonstration of AegisLang compiler steps:
+1. Lex source code
+2. Parse into AST
+3. Type-check
+4. Generate LLVM IR
+5. JIT compile & execute
+Displays intermediate data using pandas and ace_tools.
+"""
+
+import pandas as pd
+import ace_tools as tools  # If you truly need to display DataFrames in your environment
+
+from compiler.aegis_compiler import (
+    lex, AegisParser, TypeChecker, CodeGenerator, JITCompiler
+)
+
+# Example AegisLang source
+test_code = """
+module UserSystem:
+    struct User:
+        name: string
+        age: int
+
+    fn create_user(name: string, age: int) -> User:
+        return User(name, age)
+"""
+
+# 1) Lexing
+tokens = lex(test_code)
+df_tokens = pd.DataFrame(tokens, columns=["Token Type", "Value"])
+tools.display_dataframe_to_user(
+    name="Lexer Tokens for AegisLang",
+    dataframe=df_tokens
+)
+
+# 2) Parsing -> AST
+parser = AegisParser(tokens)
+ast = parser.parse()
+df_ast = pd.DataFrame([
+    {"Node Type": node.node_type, "Value": node.value, "Children": len(node.children)}
+    for node in [ast] + ast.children
+])
+tools.display_dataframe_to_user(
+    name="AST Representation of AegisLang Code",
+    dataframe=df_ast
+)
+
+# 3) Type Checking
+type_checker = TypeChecker(ast)
+type_check_result = type_checker.check()
+df_result = pd.DataFrame([{"Stage": "Semantic Analysis", "Result": type_check_result}])
+tools.display_dataframe_to_user(
+    name="Type Checking Result for AegisLang",
+    dataframe=df_result
+)
+
+# 4) Code Generation
+code_gen = CodeGenerator(ast)
+llvm_ir = code_gen.generate()
+df_llvm = pd.DataFrame([{"LLVM IR": llvm_ir}])
+tools.display_dataframe_to_user(
+    name="LLVM IR for AegisLang",
+    dataframe=df_llvm
+)
+
+# 5) JIT Compilation & Execution
+jit_compiler = JITCompiler(llvm_ir)
+execution_result = jit_compiler.compile_and_execute()
+df_execution = pd.DataFrame([{"Stage": "Compilation & Execution", "Result": execution_result}])
+tools.display_dataframe_to_user(
+    name="AegisLang Compilation & Execution Result",
+    dataframe=df_execution
+)
+
+print("Demo completed successfully!")

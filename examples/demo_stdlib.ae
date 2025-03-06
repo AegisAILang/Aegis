@@ -1,0 +1,50 @@
+"""
+Demonstration of registering and displaying the AegisLang standard libraries.
+"""
+
+import pandas as pd
+import ace_tools as tools
+
+# from stdlib.stdlib import StandardLibrary, ExtendedStandardLibrary, FullStandardLibrary
+
+def main():
+    # 1) Full standard library
+    full_std_lib = FullStandardLibrary()
+    full_std_lib.register_builtin_functions()
+    full_std_lib.register_extended_functions()
+    full_std_lib.register_advanced_functions()
+    complete_library = full_std_lib.get_library()
+
+    df_complete_std_lib = pd.DataFrame([
+        {"Function": key, "Parameters": str(value["params"]), "Return Type": value["return"]}
+        for key, value in complete_library.items()
+    ])
+    tools.display_dataframe_to_user(name="Complete Standard Library for AegisLang", dataframe=df_complete_std_lib)
+
+    # 2) Extended standard library
+    ext_std_lib = ExtendedStandardLibrary()
+    ext_std_lib.register_builtin_functions()
+    ext_std_lib.register_extended_functions()
+    extended_library = ext_std_lib.get_library()
+
+    df_extended_std_lib = pd.DataFrame([
+        {"Function": key, "Parameters": str(value["params"]), "Return Type": value["return"]}
+        for key, value in extended_library.items()
+    ])
+    tools.display_dataframe_to_user(name="Extended Standard Library Functions for AegisLang", dataframe=df_extended_std_lib)
+
+    # 3) Basic standard library
+    std_lib = StandardLibrary()
+    std_lib.register_builtin_functions()
+    standard_library = std_lib.get_library()
+
+    df_std_lib = pd.DataFrame([
+        {"Function": key, "Parameters": str(value["params"]), "Return Type": value["return"]}
+        for key, value in standard_library.items()
+    ])
+    tools.display_dataframe_to_user(name="AegisLang Standard Library Functions", dataframe=df_std_lib)
+
+    print("Stdlib demo complete!")
+
+if __name__ == "__main__":
+    main()

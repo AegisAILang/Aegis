@@ -1,0 +1,9 @@
+---
+description: Best practices for WebAssembly in Aegis
+globs: **/*.wasm
+alwaysApply: false
+---
+- Compile Aegis code to WebAssembly for browser and server portability.
+- Use wasm_compiler to generate efficient .wasm files.
+- Optimize WebAssembly modules for size and performance.
+- Ensure WebAssembly modules are properly validated and secure.

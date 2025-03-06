@@ -1,0 +1,7 @@
+module Example:
+    struct User:
+        name: string
+        age: int
+
+    fn get_user(name: string) -> User:
+        return User(name, 25)

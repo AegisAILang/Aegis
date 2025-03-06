@@ -1,0 +1,98 @@
+---
+description: Aegis Language Rules
+globs: **/*.{ae,py}
+alwaysApply: true
+---
+name: "Aegis"
+description: Aegis is an AI-optimized, high-performance, and type-safe programming language designed for deterministic, error-free code generation. Built on LLVM and WebAssembly, it empowers developers to create secure and scalable applications with a focus on clarity and efficiency.
+rules:
+  - id: "overview"
+    title: "Aegis Overview"
+    details: |
+      - Deterministic syntax, minimal ambiguity (ideal for AI code generation)
+      - Strong typing (no null values), memory-safe
+      - Modular & composable structures (modules, structs, functions)
+      - Compilation targets: LLVM IR, WebAssembly, Native binaries
+
+  - id: "language-features"
+    title: "Core Features"
+    details: |
+      - Type Safety: int, float, bool, string, plus user-defined structs/enums
+      - No dynamic typing; any advanced structure uses Option<T>, Result<T, E>
+      - Concurrency built-in (tasks, async/await)
+      - Ownership model (no GC) (similar to Rust-like safety)
+
+  - id: "syntax-example"
+    title: "Aegis Syntax Example"
+    details: |
+      module UserSystem:
+          struct User:
+              name: string
+              age: int
+
+          fn get_user(name: string) -> User:
+              return User(name, 25)
+
+      # Indentation-based or strict braces
+      # No hidden conversions or multiple ways to do the same thing
+      # Clear function signatures and return types
+
+  - id: "compiler-flow"
+    title: "Compilation Flow"
+    details: |
+      - Lex & Parse: Takes .ae file, builds an AST
+      - Semantic Analysis: Type-checks, ensures valid references
+      - IR Generation: Produces LLVM IR for optimized compilation
+      - JIT Execution or AOT: Runs code immediately or compiles a native binary
+      - WASM: Optionally compiles IR into .wasm for browser/server portability
+
+  - id: "ai-integration"
+    title: "AI-Driven Code Generation"
+    details: |
+      - Minimal ambiguous constructs for easier AI generation
+      - DSL-like approach for SaaS automation modules
+      - AI code validation, optimization, enterprise scaffolding
+
+  - id: "stdlib-package"
+    title: "Standard Library & Package Manager"
+    details: |
+      - `stdlib`: arithmetic, string ops, file I/O, networking, date/time
+      - Extended or Full versions add more advanced capabilities
+      - AegisPackageManager: Manages project creation & dependencies in aegis.json
+
+  - id: "wasm-benchmarks"
+    title: "WASM & Benchmarking"
+    details: |
+      - wasm_compiler: Builds .wasm for portable execution
+      - AOTCompiler: Native object code generation
+      - AegisLangBenchmark: Measures compile & runtime performance
+
+  - id: "security-audits"
+    title: "Security Audits"
+    details: |
+      - AegisLangSecurityAudit: Scans code for insecure patterns
+      - Ensures AI-generated code remains safe and untainted
+
+files:
+  - path: "compiler/aegis_compiler.py"
+    appliesRules:
+      - "overview"
+      - "compiler-flow"
+  - path: "compiler/aegis_ai_generator.py"
+    appliesRules:
+      - "ai-integration"
+  - path: "stdlib/stdlib.py"
+    appliesRules:
+      - "stdlib-package"
+  - path: "pkg_manager/package_manager.py"
+    appliesRules:
+      - "stdlib-package"
+  - path: "wasm/wasm_compiler.py"
+    appliesRules:
+      - "wasm-benchmarks"
+  - path: "benchmarks/benchmark.py"
+    appliesRules:
+      - "wasm-benchmarks"
+  - path: "security/security_audit.py"
+    appliesRules:
+      - "security-audits"

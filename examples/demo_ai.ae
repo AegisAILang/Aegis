@@ -1,0 +1,59 @@
+"""
+Demonstration of AI-driven code generation, validation, 
+SaaS module creation, and documentation generation.
+"""
+
+import pandas as pd
+import ace_tools as tools
+
+# Import your AI classes from whichever module you defined them in:
+# from compiler.aegis_ai_generator import (
+#     AegisAI_CodeGenerator, 
+#     AegisAI_CodeValidator,
+#     AegisAI_SaaSCodeGeneratorFixed, 
+#     AegisLangDocumentation,
+#     AegisAI_EnterpriseCodeGenerator,
+#     AegisAI_CodeOptimizer
+# )
+
+def main():
+    # 1) Basic AI Code Generation
+    ai_generator = AegisAI_CodeGenerator()
+    generated_code = ai_generator.generate_module()
+    df_generated_code = pd.DataFrame([{"Generated AegisLang Code": generated_code}])
+    tools.display_dataframe_to_user(name="AI-Generated AegisLang Code", dataframe=df_generated_code)
+
+    # 2) Validation
+    validator = AegisAI_CodeValidator(generated_code)
+    validation_result = validator.run_validation()
+    df_validation = pd.DataFrame([{"Stage": "AI Code Validation", "Result": validation_result}])
+    tools.display_dataframe_to_user(name="AegisLang AI Code Validation Results", dataframe=df_validation)
+
+    # 3) SaaS CRUD Generation
+    saas_generator_fixed = AegisAI_SaaSCodeGeneratorFixed()
+    generated_saas_code_fixed = saas_generator_fixed.generate_crud_module("Customer")
+    df_saas_code_fixed = pd.DataFrame([{"Generated SaaS Module Code": generated_saas_code_fixed}])
+    tools.display_dataframe_to_user(name="AI-Generated SaaS Module in AegisLang (Fixed)", dataframe=df_saas_code_fixed)
+
+    # 4) Documentation
+    doc_generator = AegisLangDocumentation()
+    aegislang_docs = doc_generator.generate_documentation()
+    df_docs = pd.DataFrame([{"AegisLang Documentation": aegislang_docs}])
+    tools.display_dataframe_to_user(name="AegisLang Documentation", dataframe=df_docs)
+
+    # 5) Enterprise SaaS Project
+    enterprise_generator = AegisAI_EnterpriseCodeGenerator()
+    generated_enterprise_code = enterprise_generator.generate_full_saas_project("ECommercePlatform")
+    df_enterprise_code = pd.DataFrame([{"Generated Enterprise SaaS Code": generated_enterprise_code}])
+    tools.display_dataframe_to_user(name="AI-Generated Enterprise SaaS Project in AegisLang", dataframe=df_enterprise_code)
+
+    # 6) Optimize AI Code
+    ai_optimizer = AegisAI_CodeOptimizer(generated_enterprise_code)
+    optimized_ai_code = ai_optimizer.run_optimizations()
+    df_optimized_ai_code = pd.DataFrame([{"Optimized AI-Generated Code": optimized_ai_code}])
+    tools.display_dataframe_to_user(name="Optimized AI-Generated AegisLang Code", dataframe=df_optimized_ai_code)
+
+    print("AI code generation demo complete!")
+
+if __name__ == "__main__":
+    main()
