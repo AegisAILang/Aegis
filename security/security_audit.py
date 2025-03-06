@@ -2,6 +2,7 @@
 
 import hashlib
 
+
 class AegisLangSecurityAudit:
     """Performs security checks on AegisLang compiler, standard library, and AI-generated code."""
 
@@ -16,9 +17,13 @@ class AegisLangSecurityAudit:
         for sample in self.code_samples:
             for pattern in insecure_patterns:
                 if pattern in sample:
-                    found_issues.append(f"Potential security risk: Found '{pattern}' in code.")
+                    found_issues.append(
+                        f"Potential security risk: Found '{pattern}' in code."
+                    )
 
-        return found_issues if found_issues else ["No security vulnerabilities detected."]
+        return (
+            found_issues if found_issues else ["No security vulnerabilities detected."]
+        )
 
     def integrity_check(self, code):
         """Generates a hash of the AI-generated code for integrity validation."""
@@ -28,9 +33,12 @@ class AegisLangSecurityAudit:
         """Runs all security and integrity tests."""
         audit_results = {
             "Security Scan": self.detect_insecure_patterns(),
-            "Code Integrity Hash": [self.integrity_check(sample) for sample in self.code_samples],
+            "Code Integrity Hash": [
+                self.integrity_check(sample) for sample in self.code_samples
+            ],
         }
         return audit_results
+
 
 if __name__ == "__main__":
     # Example usage

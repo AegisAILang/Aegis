@@ -1,5 +1,6 @@
 from llvmlite import ir
 
+
 # Enabling Compilation to WebAssembly (WASM) for AegisLang
 class WebAssemblyCompiler:
     """Compiles AegisLang LLVM IR into WebAssembly (WASM) bytecode."""
@@ -27,7 +28,9 @@ class WebAssemblyCompiler:
 
         return f"WebAssembly compilation successful. Output saved as '{wasm_filename}'."
 
+
 # Generating WebAssembly-Compatible LLVM IR
+
 
 class WebAssemblyIRGenerator(CodeGenerator):
     """Generates WebAssembly-compatible LLVM IR for AegisLang."""
@@ -44,7 +47,9 @@ class WebAssemblyIRGenerator(CodeGenerator):
 
         # Convert function types (WASM supports only specific types)
         llvm_return_type = self.get_wasm_compatible_type(return_type)
-        llvm_param_types = [self.get_wasm_compatible_type(ptype) for _, ptype in param_list]
+        llvm_param_types = [
+            self.get_wasm_compatible_type(ptype) for _, ptype in param_list
+        ]
 
         # Create function signature
         func_type = ir.FunctionType(llvm_return_type, llvm_param_types)
@@ -59,6 +64,10 @@ class WebAssemblyIRGenerator(CodeGenerator):
             "int": ir.IntType(32),  # WebAssembly prefers 32-bit integers
             "float": ir.FloatType(),
             "bool": ir.IntType(1),
-            "string": ir.PointerType(ir.IntType(8)),  # WASM handles strings as memory pointers
+            "string": ir.PointerType(
+                ir.IntType(8)
+            ),  # WASM handles strings as memory pointers
         }
-        return wasm_type_map.get(aegis_type, ir.VoidType())  # Default to void if unknown
+        return wasm_type_map.get(
+            aegis_type, ir.VoidType()
+        )  # Default to void if unknown

@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Debug aegis_compiler",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/compiler/aegis_compiler.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}

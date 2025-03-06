@@ -6,8 +6,10 @@ including SaaS module generation and enterprise project scaffolding.
 
 import random
 
+
 class AegisAI_CodeGenerator:
     """Automatically generates valid AegisLang code based on predefined templates."""
+
     def __init__(self):
         self.templates = {
             "struct": "struct {name}:\n    {fields}\n",
@@ -21,7 +23,12 @@ class AegisAI_CodeGenerator:
     def generate_struct(self, name=None):
         """Generates a random struct definition."""
         name = name or random.choice(self.sample_structs)
-        fields = "\n    ".join([f"{random.choice(['id', 'name', 'value'])}: {random.choice(self.sample_types)}" for _ in range(2)])
+        fields = "\n    ".join(
+            [
+                f"{random.choice(['id', 'name', 'value'])}: {random.choice(self.sample_types)}"
+                for _ in range(2)
+            ]
+        )
         return self.templates["struct"].format(name=name, fields=fields)
 
     def generate_function(self, name=None):
@@ -30,7 +37,9 @@ class AegisAI_CodeGenerator:
         params = f"{random.choice(['x', 'y'])}: {random.choice(self.sample_types)}"
         return_type = random.choice(self.sample_types)
         body = "    return x + 1" if return_type == "int" else '    return "sample"'
-        return self.templates["function"].format(name=name, params=params, return_type=return_type, body=body)
+        return self.templates["function"].format(
+            name=name, params=params, return_type=return_type, body=body
+        )
 
     def generate_module(self, name="SampleModule"):
         """Generates a complete module with struct and function."""
@@ -38,6 +47,7 @@ class AegisAI_CodeGenerator:
         function_def = self.generate_function()
         content = f"{struct_def}\n{function_def}"
         return self.templates["module"].format(name=name, content=content)
+
 
 # Implementing AI Code Validation for AegisLang
 class AegisAI_CodeValidator:
@@ -59,19 +69,29 @@ class AegisAI_CodeValidator:
                 continue
 
             # Check for missing colons in struct and function definitions
-            if stripped.startswith("struct") or stripped.startswith("fn") or stripped.startswith("module"):
+            if (
+                stripped.startswith("struct")
+                or stripped.startswith("fn")
+                or stripped.startswith("module")
+            ):
                 if ":" not in stripped:
-                    self.errors.append(f"Syntax Error: Missing ':' in definition: {stripped}")
+                    self.errors.append(
+                        f"Syntax Error: Missing ':' in definition: {stripped}"
+                    )
 
             # Check indentation consistency
             current_indent = len(line) - len(line.lstrip())
             if current_indent % 4 != 0:
-                self.errors.append(f"Syntax Error: Inconsistent indentation on line: {line}")
+                self.errors.append(
+                    f"Syntax Error: Inconsistent indentation on line: {line}"
+                )
 
             # Ensure function return statements are correct
             if stripped.startswith("return "):
                 if "(" in stripped or ")" in stripped:
-                    self.errors.append(f"Syntax Error: Invalid function return format: {stripped}")
+                    self.errors.append(
+                        f"Syntax Error: Invalid function return format: {stripped}"
+                    )
 
     def validate_types(self):
         """Checks if types are properly defined."""
@@ -85,7 +105,9 @@ class AegisAI_CodeValidator:
                 if len(parts) > 1:
                     declared_type = parts[1].strip()
                     if declared_type not in allowed_types:
-                        self.errors.append(f"Type Error: Undefined type '{declared_type}' in line: {stripped}")
+                        self.errors.append(
+                            f"Type Error: Undefined type '{declared_type}' in line: {stripped}"
+                        )
 
     def run_validation(self):
         """Runs all validation checks."""
@@ -96,6 +118,7 @@ class AegisAI_CodeValidator:
             return "Code Validation Passed ✅"
         return "\n".join(self.errors)
 
+
 # Enhancing AI Code Generation for Complex SaaS Development
 class AegisAI_SaaSCodeGeneratorFixed(AegisAI_CodeGenerator):
     """Generates AI-optimized AegisLang code for SaaS applications with proper string formatting."""
@@ -103,38 +126,42 @@ class AegisAI_SaaSCodeGeneratorFixed(AegisAI_CodeGenerator):
     def generate_crud_module(self, entity_name="User"):
         """Generates a complete CRUD module for a given entity."""
         struct_def = self.generate_struct(entity_name)
-        
+
         functions = [
             self.templates["function"].format(
                 name=f"create_{entity_name.lower()}",
                 params=f"data: {entity_name}",
                 return_type="bool",
-                body="    return true"
+                body="    return true",
             ),
             self.templates["function"].format(
                 name=f"get_{entity_name.lower()}",
                 params="id: int",
                 return_type=entity_name,
-                body=f"    return {entity_name}(id=1, name=\"Sample\")"
+                body=f'    return {entity_name}(id=1, name="Sample")',
             ),
             self.templates["function"].format(
                 name=f"update_{entity_name.lower()}",
                 params=f"id: int, data: {entity_name}",
                 return_type="bool",
-                body="    return true"
+                body="    return true",
             ),
             self.templates["function"].format(
                 name=f"delete_{entity_name.lower()}",
                 params="id: int",
                 return_type="bool",
-                body="    return true"
+                body="    return true",
             ),
         ]
 
         module_content = f"{struct_def}\n" + "\n".join(functions)
-        return self.templates["module"].format(name=f"{entity_name}Module", content=module_content)
+        return self.templates["module"].format(
+            name=f"{entity_name}Module", content=module_content
+        )
+
 
 # Finalizing AegisLang Features & Documentation
+
 
 class AegisLangDocumentation:
     """Generates structured documentation for AegisLang, covering syntax, features, and usage."""
@@ -150,11 +177,26 @@ class AegisLangDocumentation:
                 "Loops": "for i in 0..10:\n    # Loop logic\n\nwhile condition:\n    # While loop logic",
             },
             "Standard Library": {
-                "Arithmetic": ["add(a: int, b: int) -> int", "subtract(a: int, b: int) -> int"],
-                "String Operations": ["length(s: string) -> int", "concat(s1: string, s2: string) -> string"],
-                "File I/O": ["read_file(filename: string) -> string", "write_file(filename: string, content: string) -> bool"],
-                "Networking": ["http_get(url: string) -> string", "http_post(url: string, data: string) -> string"],
-                "Date/Time": ["current_timestamp() -> int", "format_date(timestamp: int, format: string) -> string"],
+                "Arithmetic": [
+                    "add(a: int, b: int) -> int",
+                    "subtract(a: int, b: int) -> int",
+                ],
+                "String Operations": [
+                    "length(s: string) -> int",
+                    "concat(s1: string, s2: string) -> string",
+                ],
+                "File I/O": [
+                    "read_file(filename: string) -> string",
+                    "write_file(filename: string, content: string) -> bool",
+                ],
+                "Networking": [
+                    "http_get(url: string) -> string",
+                    "http_post(url: string, data: string) -> string",
+                ],
+                "Date/Time": [
+                    "current_timestamp() -> int",
+                    "format_date(timestamp: int, format: string) -> string",
+                ],
             },
             "Compilation Targets": [
                 "LLVM IR (.ll) - Optimized for AI-driven compilation",
@@ -163,7 +205,7 @@ class AegisLangDocumentation:
             ],
             "AI Code Generation": "AegisLang features AI-driven code generation for SaaS modules, ensuring consistent syntax and optimized logic.",
             "Package Management": "Use the AegisLang package manager to create projects, install packages, and manage dependencies.",
-            "Future Roadmap": "Enhancements for AI-driven optimizations, cloud-native deployments, and broader ecosystem integration."
+            "Future Roadmap": "Enhancements for AI-driven optimizations, cloud-native deployments, and broader ecosystem integration.",
         }
 
     def generate_documentation(self):
@@ -186,15 +228,18 @@ class AegisLangDocumentation:
                 formatted_doc += f"{content}\n\n"
         return formatted_doc
 
+
 # Optimizing AI Code Generation for Large-Scale SaaS Projects
 class AegisAI_EnterpriseCodeGenerator(AegisAI_SaaSCodeGenerator):
     """Generates AI-optimized AegisLang code for large-scale enterprise SaaS applications."""
+
     def generate_full_saas_project(self, project_name="EnterpriseSaaS"):
         """Generates a complete multi-module SaaS project structure."""
         entities = ["User", "Order", "Product", "Invoice"]
         modules = [self.generate_crud_module(entity) for entity in entities]
         project_structure = f"module {project_name}:\n\n" + "\n\n".join(modules)
         return project_structure
+
 
 # Example usage:
 if __name__ == "__main__":

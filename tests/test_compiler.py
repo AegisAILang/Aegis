@@ -8,6 +8,7 @@ Uses unittest to ensure the compiler (lexer, parser, type checker, IR generator)
 import unittest
 from compiler.aegis_compiler import lex, AegisParser, TypeChecker, CodeGenerator
 
+
 class TestAegisCompiler(unittest.TestCase):
     def setUp(self):
         # Example AegisLang source to test
@@ -34,5 +35,6 @@ module TestModule:
         llvm_ir = code_gen.generate()
         self.assertIn("define", llvm_ir)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

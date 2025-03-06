@@ -1,6 +1,7 @@
 import os
 import json
 
+
 class AegisPackageManager:
     """Handles package management for AegisLang, including dependency installation and module tracking."""
 
@@ -19,7 +20,9 @@ class AegisPackageManager:
             os.makedirs(project_path)
             config_path = os.path.join(project_path, self.CONFIG_FILE)
             with open(config_path, "w") as config_file:
-                json.dump({"name": project_name, "dependencies": {}}, config_file, indent=4)
+                json.dump(
+                    {"name": project_name, "dependencies": {}}, config_file, indent=4
+                )
             return f"Project '{project_name}' created successfully."
         else:
             return f"Project '{project_name}' already exists."

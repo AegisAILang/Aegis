@@ -7,6 +7,7 @@ import ace_tools as tools
 
 # Enabling Native Binary Compilation (LLVM AOT Compiler)
 
+
 class AOTCompiler:
     """Compiles AegisLang LLVM IR into a native binary."""
 
@@ -23,7 +24,7 @@ class AOTCompiler:
         # Set target triple to the native machine
         target = binding.Target.from_default_triple()
         target_machine = target.create_target_machine()
-        
+
         # Generate native object code
         object_code = target_machine.emit_object(llvm_module)
 
@@ -36,6 +37,7 @@ class AOTCompiler:
         # `clang aegis_binary.o -o aegis_binary`
 
         return f"Native compilation successful. Object file saved as '{obj_filename}'."
+
 
 class AegisLangBenchmark:
     """Tests the execution speed of AI-generated AegisLang code compiled to native binaries."""
@@ -54,7 +56,11 @@ class AegisLangBenchmark:
         end_time = time.time()
         compile_time = end_time - start_time
 
-        return {"Stage": "Native Compilation", "Time (s)": compile_time, "Result": compile_result}
+        return {
+            "Stage": "Native Compilation",
+            "Time (s)": compile_time,
+            "Result": compile_result,
+        }
 
     def benchmark_execution_time(self):
         """Measures execution speed of a compiled AegisLang binary."""
@@ -66,14 +72,15 @@ class AegisLangBenchmark:
         end_time = time.time()
         execution_time = end_time - start_time
 
-        return {"Stage": "Execution", "Time (s)": execution_time, "Result": "Simulated Execution Completed"}
+        return {
+            "Stage": "Execution",
+            "Time (s)": execution_time,
+            "Result": "Simulated Execution Completed",
+        }
 
     def run_benchmarks(self):
         """Runs all benchmark tests."""
-        results = [
-            self.benchmark_native_compilation(),
-            self.benchmark_execution_time()
-        ]
+        results = [self.benchmark_native_compilation(), self.benchmark_execution_time()]
         return results
 
 
@@ -84,4 +91,6 @@ if __name__ == "__main__":
     results = benchmark.run_benchmarks()
 
     df_benchmarks = pd.DataFrame(results)
-    tools.display_dataframe_to_user(name="AegisLang Performance Benchmark Results", dataframe=df_benchmarks)
+    tools.display_dataframe_to_user(
+        name="AegisLang Performance Benchmark Results", dataframe=df_benchmarks
+    )

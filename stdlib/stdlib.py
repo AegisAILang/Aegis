@@ -1,4 +1,3 @@
-
 class StandardLibrary:
     """Defines the core standard library functions for AegisLang."""
 
@@ -38,7 +37,8 @@ class StandardLibrary:
             ret i64 %sum
         }
         """
-    
+
+
 class ExtendedStandardLibrary(StandardLibrary):
     """Expands the standard library with more built-in functions."""
 
@@ -130,6 +130,7 @@ class ExtendedStandardLibrary(StandardLibrary):
             ret i8* %result
         }
         """
+
 
 class FullStandardLibrary(ExtendedStandardLibrary):
     """Further expands the standard library with file I/O, networking, and date/time utilities."""
@@ -241,6 +242,8 @@ class FullStandardLibrary(ExtendedStandardLibrary):
             ret i8* %formatted_date
         }
         """
+
+
 # Example usage:
 if __name__ == "__main__":
     lib = FullStandardLibrary()

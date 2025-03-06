@@ -1,5 +1,6 @@
 # Final AI Optimization for Code Efficiency & Scalability
 
+
 class AegisAI_CodeOptimizer:
     """Refines AI-generated AegisLang code for maximum efficiency and scalability."""
 
@@ -27,7 +28,9 @@ class AegisAI_CodeOptimizer:
 
     def enforce_best_practices(self):
         """Ensures AI-generated code follows best practices."""
-        best_practices_code = self.code.replace("return true", "return Ok(true)")  # Use proper return handling
+        best_practices_code = self.code.replace(
+            "return true", "return Ok(true)"
+        )  # Use proper return handling
         return best_practices_code
 
     def run_optimizations(self):
@@ -36,6 +39,7 @@ class AegisAI_CodeOptimizer:
         optimized_code = self.remove_redundant_code()
         optimized_code = self.enforce_best_practices()
         return optimized_code
+
 
 # Example usage:
 if __name__ == "__main__":
