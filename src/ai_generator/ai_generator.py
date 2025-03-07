@@ -5,7 +5,9 @@ including SaaS module generation and enterprise project scaffolding.
 """
 
 import random
+from utils.logger import get_logger
 
+logger = get_logger(__name__)
 
 class AegisAI_CodeGenerator:
     """Automatically generates valid AegisLang code based on predefined templates."""

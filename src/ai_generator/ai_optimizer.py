@@ -1,5 +1,6 @@
-# Final AI Optimization for Code Efficiency & Scalability
+from utils.logger import get_logger
 
+logger = get_logger(__name__)
 
 class AegisAI_CodeOptimizer:
     """Refines AI-generated AegisLang code for maximum efficiency and scalability."""

@@ -1,6 +1,8 @@
 import unittest
-from compiler.aegis_compiler import lex, AegisParser, TypeChecker, CodeGenerator
-
+from src.lexer.lexer import lex
+from src.parser.parser import AegisParser
+from src.compiler.type_checker import TypeChecker
+from src.compiler.code_generator import CodeGenerator
 
 class CompilerTest(unittest.TestCase):
     def setUp(self):

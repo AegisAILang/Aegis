@@ -6,7 +6,10 @@ Uses unittest to ensure the compiler (lexer, parser, type checker, IR generator)
 """
 
 import unittest
-from compiler.aegis_compiler import lex, AegisParser, TypeChecker, CodeGenerator
+from src.lexer.lexer import lex
+from src.parser.parser import AegisParser
+from src.compiler.type_checker import TypeChecker
+from src.compiler.code_generator import CodeGenerator
 
 
 class TestAegisCompiler(unittest.TestCase):
