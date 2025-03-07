@@ -1,0 +1,11 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Update Codebase JSONL",
+        "type": "shell",
+        "command": "python ${workspaceFolder}/script.py",
+        "problemMatcher": []
+      }
+    ]
+  }

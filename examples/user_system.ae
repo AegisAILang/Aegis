@@ -1,0 +1,20 @@
+module UserSystem:
+    struct User:
+        name: string
+        age: int
+        is_active: bool = true
+    
+    enum UserRole:
+        Guest
+        Regular
+        Admin(string)  # Admin with permission level
+    
+    fn get_user(name: string) -> User:
+        let default_age: int = 30
+        return User(name, default_age)
+    
+    fn is_admin(role: UserRole) -> bool:
+        if role == UserRole.Admin:
+            return true
+        else:
+            return false 

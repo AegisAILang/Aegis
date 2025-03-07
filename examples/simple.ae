@@ -1,0 +1,7 @@
+module Test:
+    struct Point:
+        x: int
+        y: int
+    
+    fn create_point(x: int, y: int) -> Point:
+        return Point(x, y) 

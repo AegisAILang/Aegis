@@ -299,3 +299,25 @@ Backup of *.doc*
 
 # Visio autosave temporary files
 *.~vsd*
+
+.repomix-output.txt
+.cursor-tools.env
+script.py
+/generated
+/generated/*
+__pycache__/*
+*.interp
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.tokens
+*.log
+*.cache
+*.lock
+*.bak
+*.tmp
+*.swp
+*.journal
+*.jar
